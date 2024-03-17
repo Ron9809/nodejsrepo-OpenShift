@@ -1,0 +1,38 @@
+# app-deployment.yaml
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: servicio-b-calculadora-deployment
+  namespace: nodejsprojects
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: servicio-b-calculadora
+  template:
+    metadata:
+      labels:
+        app: servicio-b-calculadora
+    spec:
+      containers:
+      - name: servicio-b-calculadora-container
+        image: rocko98/servicio-b-calculadorapp
+        ports:
+        - containerPort: 3000
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: servicio-b-calculadora-service
+  namespace: nodejsprojects
+spec:
+  selector:
+    app: servicio-b-calculadora
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: LoadBalancer
