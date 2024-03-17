@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: nodejs-microservice-container
-        image: jrojas02/demo
+        image: rocko98/nodejsapp-microservicio
         ports:
         - containerPort: 3000
 
